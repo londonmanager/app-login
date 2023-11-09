@@ -1,23 +1,103 @@
-import { logOut } from '../helpers/auth'
 import {
+  ButtonCircle,
   ButtonThumb,
-  Typography,
   Dropdown,
-  DropdownItem
+  DropdownItem,
+  Typography
 } from 'londonmanager-legos'
-import ButtonPop from '../components/ButtonPop'
-import Logo from '../assets/ldnman-logo.svg'
+import ButtonBlock from '../components/ButtonBlock'
+import ButtonSection from '../components/ButtonSection'
 
-import styles from './Profile.module.scss'
+import styles from './Menu.module.scss'
 
-export default function Profile () {
+import Comprar from '../assets/menu/comprar.svg'
+import Fabricacion from '../assets/menu/fabricacion.svg'
+import Promociones from '../assets/menu/promociones.svg'
+import Stock from '../assets/menu/stock.svg'
+import Mesas from '../assets/menu/mesas.svg'
+import Mostrador from '../assets/menu/mostrador.svg'
+import Receta from '../assets/menu/receta.svg'
+import Vender from '../assets/menu/vender.svg'
+import { useParams } from 'react-router-dom'
+
+export default function Menu ({ user }) {
+  const { popID } = useParams()
+
   return (
-    <>
+    <div className={styles.content}>
+      <div className={styles.background} />
+
       <section className={styles.container1}>
+        {/* Espacio 1 */}
         <div className={styles.col1}>
-          <img src={Logo} loading='lazy' alt='London Manager' />
+          <ButtonBlock
+            component='a'
+            href="/profile"
+            icon={
+              <svg
+                width='24'
+                height='24'
+                viewBox='0 0 24 24'
+                fill='none'
+                xmlns='http://www.w3.org/2000/svg'
+              >
+                <path
+                  d='M3 9.00003L12 2.00003L21 9.00003V20C21 20.5305 20.7893 21.0392 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0392 3 20.5305 3 20V9.00003Z'
+                  stroke='currentColor'
+                  strokeWidth='1.5'
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                ></path>
+                <path
+                  d='M9 22V12H15V22'
+                  stroke='currentColor'
+                  strokeWidth='1.5'
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                ></path>
+              </svg>
+            }
+            action={() => router.push('/profile')}
+          />
+          <ButtonThumb src='https://londonmanager.com/2021/imagenes/puntos_de_venta/ptovta_5.png' />
+          <div className={styles.textPop}>
+            <Typography type='title' size='xs'>
+              Nuevo Origen
+            </Typography>
+            <Typography type='subtitle' size='sm'>
+              Brandsen 823 - Formosa
+            </Typography>
+          </div>
         </div>
+
+        {/* Espacio 2 */}
         <div className={styles.col2}>
+          <ButtonCircle
+            icon={
+              <svg
+                width='24'
+                height='24'
+                viewBox='0 0 24 24'
+                fill='none'
+                xmlns='http://www.w3.org/2000/svg'
+              >
+                <path
+                  d='M18 8.00002C18 6.40872 17.3679 4.88259 16.2426 3.75738C15.1174 2.63216 13.5913 2.00002 12 2.00002C10.4087 2.00002 8.88258 2.63216 7.75736 3.75738C6.63214 4.88259 6 6.40872 6 8.00002C6 15 3 17 3 17H21C21 17 18 15 18 8.00002Z'
+                  stroke='white'
+                  strokeWidth='1.5'
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                />
+                <path
+                  d='M13.7295 21C13.5537 21.3031 13.3014 21.5547 12.9978 21.7295C12.6941 21.9044 12.3499 21.9965 11.9995 21.9965C11.6492 21.9965 11.3049 21.9044 11.0013 21.7295C10.6977 21.5547 10.4453 21.3031 10.2695 21'
+                  stroke='white'
+                  strokeWidth='1.5'
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                />
+              </svg>
+            }
+          />
           <Dropdown inverted align='right'>
             <DropdownItem
               label='Ver perfil'
@@ -75,7 +155,6 @@ export default function Profile () {
                   ></path>
                 </svg>
               }
-              onClick={logOut()}
             />
           </Dropdown>
           <ButtonThumb src='https://media.licdn.com/dms/image/C5603AQGgb6x_p1qSng/profile-displayphoto-shrink_400_400/0/1577834137236?e=1701302400&v=beta&t=d5KEo7R6XC588M3mBdJr8MCt2uaSe-kmUeFDjy68a1E' />
@@ -83,41 +162,45 @@ export default function Profile () {
       </section>
 
       <section className={styles.container2}>
-        <Typography
-          component='h1'
-          type='title'
-          size='sm'
-          className={styles['text-title']}
-        >
-          ¡Bienvenid@ Arián! 👋
-        </Typography>
+        <div className={styles.buttonsContainer}>
+          <ButtonSection label='Mesas' icon={<img src={Mesas} aria-hidden />} />
 
-        <Typography component='h2' type='subtitle' className={styles['text-subtitle']}>
-          ¿A qué punto de venta querés ingresar?
-        </Typography>
+          <ButtonSection
+            label='Mostrador'
+            icon={<img src={Mostrador} aria-hidden />}
+          />
 
-        <div className={styles['buttons-container']}>
-          <ButtonPop />
-          <ButtonPop
-            src='https://londonmanager.com/2021/imagenes/puntos_de_venta/ptovta_5.png'
-            name='Nuevo Origen'
+          <ButtonSection
+            label='Vender'
+            icon={<img src={Vender} aria-hidden />}
           />
-          <ButtonPop name='Saboratto' />
-          <ButtonPop
-            src='https://londonmanager.com/2021/imagenes/puntos_de_venta/3/31_07_2023-2JLNs-Avatar-Verona.png'
-            name='Verona'
+
+          <ButtonSection
+            label='Comprar'
+            icon={<img src={Comprar} aria-hidden />}
           />
-          {/* <ButtonPop name='El Principio Parrilla' />
-          <ButtonPop
-            src='https://londonmanager.com/2021/imagenes/puntos_de_venta/1/18_06_2020-YeiNu-london-logo.png'
-            name='London Market'
+
+          <ButtonSection
+            label='Recetas'
+            icon={<img src={Stock} aria-hidden />}
           />
-          <ButtonPop name='Verona' />
-          <ButtonPop name='Nuevo Origen' />
-          <ButtonPop name='London Market' />
-          <ButtonPop name='Verona' /> */}
+
+          <ButtonSection
+            label='Recetas'
+            icon={<img src={Receta} aria-hidden />}
+          />
+
+          <ButtonSection
+            label='Fabricación'
+            icon={<img src={Fabricacion} aria-hidden />}
+          />
+
+          <ButtonSection
+            label='Promociones'
+            icon={<img src={Promociones} aria-hidden />}
+          />
         </div>
       </section>
-    </>
+    </div>
   )
 }

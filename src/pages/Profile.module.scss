@@ -1,0 +1,80 @@
+@import '../Legos.scss';
+
+body { 
+  background-color: $grayscale-600;
+}
+
+.container1 {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  border-bottom: 1px solid $grayscale-500;
+  padding: 0 16px;
+  height: 104px;
+  gap: 12px;
+
+  .col1 {
+    padding: 2rem 0 1rem 0;
+    img {
+      height: 36px;
+    }
+  }
+
+  .col2 {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+  }
+}
+
+.container2 {
+  display: block;
+  text-align: center;
+  height: calc(100vh - 104px);
+  overflow-y: auto;
+  padding: 10vh 0 15vh 0;
+  box-sizing: border-box;
+  margin: 0 auto;
+
+  .text-title {
+    color: $grayscale-0;
+    margin-bottom: 5rem;
+  }
+  .text-subtitle {
+    color: $grayscale-0;
+    margin-bottom: 3rem;
+  }
+}
+
+.buttons-container {
+  box-sizing: border-box;
+  display: inline-grid;
+  gap: 42px 12px;
+  grid-template-columns: repeat(auto-fit, minmax(128px, 1fr));
+}
+
+@include bundle($type: 'sm') {
+  .flex-right {
+    justify-content: center;
+  }
+  
+  .flex-left {
+    justify-content: center;
+  }
+
+  .buttons-container {
+    width: 300px;
+  }
+}
+@include bundle($type: 'md') {
+  .buttons-container {
+    width: 474px;
+  }
+}
+@include bundle($type: 'lg') {
+  .buttons-container {
+    width: 600px;
+  }
+}

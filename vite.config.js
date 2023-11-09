@@ -1,8 +1,10 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// https://vitejs.dev/config/
+const BASE_URL = 'https://londonmanager-login.onrender.com'
+const BASE_URL_LOCAL = 'http://localhost:5173'
+
 export default defineConfig({
   plugins: [react()],
-  base: 'https://londonmanager-login.onrender.com/'
+  base: BASE_URL_LOCAL
 })

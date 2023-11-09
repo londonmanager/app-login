@@ -1,0 +1,19 @@
+@import 'londonmanager-legos/common/index';
+
+.container {
+  display: flex;
+  color: $grayscale-200;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.button {
+  height: 72px;
+  width: 104px;
+  border: 0px;
+  border-radius: 8px;
+  color: $grayscale-300;
+  background: rgba(27, 28, 35, 0.80);
+  cursor: pointer;
+  margin-bottom: 8px;
+}

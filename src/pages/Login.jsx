@@ -1,9 +1,11 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Controller, useForm } from 'react-hook-form'
+import axios from 'axios'
 
 import { Typography, Button, TextField, Spacer } from 'londonmanager-legos'
-import { setCookie } from '../utils/cookies.js'
 
+import EyeIcon from '../components/icons/EyeIcon.jsx'
 import './Login.scss'
 
 const formSchema = {
@@ -11,30 +13,7 @@ const formSchema = {
   password: ''
 }
 
-const EyeIcon = () => (
-  <svg
-    width='16'
-    height='16'
-    viewBox='0 0 16 16'
-    fill='none'
-    xmlns='http://www.w3.org/2000/svg'
-  >
-    <path
-      d='M0.666016 7.99996C0.666016 7.99996 3.33268 2.66663 7.99935 2.66663C12.666 2.66663 15.3327 7.99996 15.3327 7.99996C15.3327 7.99996 12.666 13.3333 7.99935 13.3333C3.33268 13.3333 0.666016 7.99996 0.666016 7.99996Z'
-      stroke='#374151'
-      strokeLinecap='round'
-      strokeLinejoin='round'
-    />
-    <path
-      d='M8 10C9.10457 10 10 9.10457 10 8C10 6.89543 9.10457 6 8 6C6.89543 6 6 6.89543 6 8C6 9.10457 6.89543 10 8 10Z'
-      stroke='#374151'
-      strokeLinecap='round'
-      strokeLinejoin='round'
-    />
-  </svg>
-)
-
-const apiUrl = 'https://api.londonmanager.pro/auth/login'
+const apiUrl = `${import.meta.env.VITE_LONDONMANAGER_URL}/auth/login`
 
 export default function Login () {
   const [showPassword, setShowPassword] = useState(false)
@@ -42,6 +21,8 @@ export default function Login () {
     ...formSchema
   })
   const [loading, setLoading] = useState(false)
+
+  const navigate = useNavigate()
 
   // Form Controls
   const toggleShowPassword = () => setShowPassword(prev => !prev)
@@ -52,42 +33,27 @@ export default function Login () {
     }
   })
 
-  const onSubmit = async data => {
+  const onSubmit = async dataForm => {
     setLoading(true)
 
     try {
-      const response = await fetch(apiUrl, {
-        method: 'POST',
+      const { data } = await axios.post(apiUrl, dataForm, {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(data)
+        timeout: 10000
       })
 
-      const responseData = await response.json()
-
-      if (responseData?.error) {
-        if (typeof responseData?.error === 'string') {
-          setErrors({
-            general: responseData.error
-          })
-        } else {
-          setErrors({
-            ...responseData.error
-          })
-        }
+      if (data) {
+        window.sessionStorage.setItem('idToken', data.idToken.jwtToken)
+        navigate('/profile')
       }
-
-      if (response.ok) {
-        // Sesión exitosa
-        setCookie('idToken', responseData?.idToken.jwtToken)
-        setCookie('refreshToken', responseData?.refreshToken.token)
-        setCookie('accessToken', responseData?.accessToken.jwtToken)
-      }
-    } catch (error) {
+    } catch (err) {
+      const errMessage = err?.response?.data?.error ?? err.message
+      const errors = { ...err?.response?.data?.errors } || {}
       setErrors({
-        general:
-          'Ocurrió un error inesperado. Por favor comuníquese con el administrador.'
+        general: errMessage,
+        ...errors
       })
     }
 
@@ -162,7 +128,12 @@ export default function Login () {
       {/* Fin del formulario */}
 
       <Spacer height={16} />
-      <Typography component='a' href="reset-password" className='text-button margin-auto' size='sm'>
+      <Typography
+        component='a'
+        href='reset-password'
+        className='text-button margin-auto'
+        size='sm'
+      >
         No recuerdo mi contraseña
       </Typography>
 

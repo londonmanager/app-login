@@ -2,41 +2,60 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
-import Auth from './layouts/Auth.jsx'
+import { Auth, NoAuth } from './layouts/Auth.jsx'
 import AuthLayout from './layouts/AuthLayout.jsx'
 import Login from './pages/Login.jsx'
+import Menu from './pages/Menu.jsx'
 import SignUp from './pages/SignUp.jsx'
-import './index.css'
 import ResetPassword from './pages/ResetPassword.jsx'
+import Profile from './pages/Profile.jsx'
+import './index.scss'
+
 
 const router = createBrowserRouter([
   {
     path: '/login',
     element: (
-      <Auth>
+      <NoAuth>
         <AuthLayout>
           <Login />
         </AuthLayout>
-      </Auth>
+      </NoAuth>
     )
   },
   {
     path: '/signup',
     element: (
-      <Auth>
+      <NoAuth>
         <AuthLayout>
           <SignUp />
         </AuthLayout>
-      </Auth>
+      </NoAuth>
     )
   },
   {
     path: '/reset-password',
     element: (
-      <Auth>
+      <NoAuth>
         <AuthLayout>
           <ResetPassword />
         </AuthLayout>
+      </NoAuth>
+    )
+  },
+  {
+    path: '/profile',
+    element: (
+      <Auth>
+        <Profile />
+      </Auth>
+    )
+  },
+  {
+    path: '/menu/:popID',
+    element: (
+      <Auth>
+        <Menu />
       </Auth>
     )
   }
