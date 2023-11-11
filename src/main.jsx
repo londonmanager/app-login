@@ -2,7 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
-import { Auth, NoAuth } from './layouts/Auth.jsx'
+import { Auth } from './layouts/Auth.jsx'
+import { NoAuth } from './layouts/NoAuth.jsx'
 import AuthLayout from './layouts/AuthLayout.jsx'
 import Login from './pages/Login.jsx'
 import Menu from './pages/Menu.jsx'
@@ -10,7 +11,6 @@ import SignUp from './pages/SignUp.jsx'
 import ResetPassword from './pages/ResetPassword.jsx'
 import Profile from './pages/Profile.jsx'
 import './index.scss'
-
 
 const router = createBrowserRouter([
   {

@@ -2,31 +2,39 @@ import { useEffect, useState } from 'react'
 import { removeToken, validateToken } from '../helpers/auth'
 
 export function useSession () {
-  const [data, setData] = useState()
-  const [status, setStatus] = useState('loading')
+  const [state, setState] = useState({
+    data: undefined,
+    status: 'loading'
+  })
   
   useEffect(() => {
     const idToken = window.sessionStorage.getItem('idToken')
 
     if (idToken) {
-      validateToken(idToken).then((data) => {
+      validateToken(idToken).then(data => {
         if(data) {
-          setStatus('authenticated')
-          setData(data)
+          setState({
+            data: data,
+            status: 'authenticated'
+          })
         } else {
-          setStatus('unauthenticated')
-          setData()
+          setState({
+            data: undefined,
+            status: 'unauthenticated'
+          })
           removeToken()
         }
       })
     } else {
-      setStatus('unauthenticated')
-      setData()
+      setState({
+        data: undefined,
+        status: 'unauthenticated'
+      })
     }
   }, [])
 
   return {
-    data,
-    status
+    data: state.data,
+    status: state.status
   }
 }

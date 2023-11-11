@@ -75,7 +75,7 @@ export default function Profile () {
                   ></path>
                 </svg>
               }
-              onClick={logOut()}
+              onClick={() => logOut()}
             />
           </Dropdown>
           <ButtonThumb src='https://media.licdn.com/dms/image/C5603AQGgb6x_p1qSng/profile-displayphoto-shrink_400_400/0/1577834137236?e=1701302400&v=beta&t=d5KEo7R6XC588M3mBdJr8MCt2uaSe-kmUeFDjy68a1E' />
