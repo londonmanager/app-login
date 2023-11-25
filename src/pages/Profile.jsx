@@ -1,4 +1,4 @@
-import { logOut } from '../helpers/auth'
+import { logOut } from 'londonmanager-tools'
 import {
   ButtonThumb,
   Typography,
