@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import { useSession } from "../hooks/useSession"
+import { useSession } from "londonmanager-tools"
 
 export const NoAuth = ({ children }) => {
   const { status } = useSession()

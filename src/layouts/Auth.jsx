@@ -1,6 +1,6 @@
-import { useNavigate } from 'react-router-dom'
-import { useSession } from '../hooks/useSession'
 import { cloneElement } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useSession } from 'londonmanager-tools'
 
 export const Auth = ({ children }) => {
   const { data: user, status } = useSession()
