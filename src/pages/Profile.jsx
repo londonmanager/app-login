@@ -7,7 +7,6 @@ import {
 } from 'londonmanager-legos'
 import ButtonPop from '../components/ButtonPop'
 import Logo from '../assets/ldnman-logo.svg'
-
 import styles from './Profile.module.scss'
 
 export default function Profile () {
