@@ -11,6 +11,10 @@ import '../index.scss'
 
 const router = createBrowserRouter([
   {
+    path: '/',
+    element: <p>Buenas</p>
+  },
+  {
     path: '/login',
     element: (
       <NoAuth>
